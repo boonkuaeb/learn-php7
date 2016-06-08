@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+{% block title %}My Homepage{% endblock %}
+{% block content %}
+    {% for post in posts %}
+        {% include 'post.html.twig' %}
+    {% endfor %}
+{% endblock %}
