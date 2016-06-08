@@ -1,6 +1,7 @@
 <?php
 require 'config/database.php';
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
 use Silex\Application;
 use Silex\Provider\{
@@ -11,8 +12,6 @@ use Silex\Provider\{
     DoctrineServiceProvider
 };
 
-
-use Doctrine\ORM\EntityManager;
 
 $app = new Application();
 $app->register(new ServiceControllerServiceProvider());
@@ -28,6 +27,6 @@ $isDevMode = false;
 $config = Setup::createYAMLMetadataConfiguration($paths, $isDevMode, __DIR__ . '/cache/');
 $config->setAutoGenerateProxyClasses(true);
 
-$app['em'] = EntityManager::create($dbConnection,$config);
+$app['em'] = EntityManager::create($dbConnection, $config);
 
 return $app;

@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Controller;
 
-use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Psr\Log\LoggerInterface;
 
 class Homepage
 {
@@ -16,16 +15,14 @@ class Homepage
         $this->log = $log;
     }
 
-    public function indexAction() : Response
+    public function indexAction(): Response
     {
-        $this->log->addDebug("Test the monolog logging");
-
         $posts = $this->getPosts();
 
         return new Response(
             $this->twig->render('index.html.twig',
                 array(
-                    'posts' => $posts
+                'posts' => $posts
                 )
             )
         );
@@ -33,22 +30,24 @@ class Homepage
 
     private function getPosts() : array
     {
-        $postA = [
-            'title' => 'first article',
-            'description' => 'first description',
-            'image' => 'http://placehold.it/600x270',
-            'likes' => 1,
-            'comments' => 1
-        ];
-        $postB = [
-            'title' => 'second article',
-            'description' => 'second description',
-            'image' => 'http://placehold.it/600x270',
-            'likes' => 2,
-            'comments' => 2
-        ];
+        $postA =
+            [
+                'title' => 'first article',
+                'description' => 'first description',
+                'image' => 'http://placehold.it/600x270',
+                'likes' => 1,
+                'comments' => 1
+            ];
 
-        return [$postA, $postB];
+        $postB =
+            [
+                'title' => 'second article',
+                'description' => 'second description',
+                'image' => 'http://placehold.it/600x270',
+                'likes' => 2,
+                'comments' => 2
+            ];
+
+        return [ $postA, $postB ];
     }
-
 }
