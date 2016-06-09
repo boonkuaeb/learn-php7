@@ -4,7 +4,12 @@ namespace App\Controller;
 use App\Model\User;
 use App\Model\UserRole;
 use App\Password\HasherInterface;
+use App\Traits\UserFormTraits;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\{
     Routing\Generator\UrlGeneratorInterface,
     Security\Csrf\CsrfTokenManagerInterface
@@ -15,11 +20,6 @@ use Symfony\Component\HttpFoundation\{
     Response,
     Session\SessionInterface
 };
-use Symfony\Component\Security\Csrf\CsrfToken;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Traits\UserFormTraits;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class SignUp
 {
@@ -41,8 +41,7 @@ class SignUp
         ValidatorInterface $validator,
         EntityManagerInterface $em,
         HasherInterface $hasher
-    )
-    {
+    ) {
         $this->twig = $twig;
         $this->log = $log;
         $this->csrfProvider = $csrfProvider;
@@ -125,7 +124,7 @@ class SignUp
         $errorMessages = array();
         foreach ($errors as $error) {
             if (count($error) > 0) {
-                $errorMessages[] =  $error->get(0)->getMessage();
+                $errorMessages[] = $error->get(0)->getMessage();
             }
         }
 

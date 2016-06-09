@@ -3,3 +3,8 @@ app/cache
 app/logs
 vendor
 composer.lock
+docker-compose.yml
+dockerconfig
+.dockerignore
+Dockerfile
+tmp
